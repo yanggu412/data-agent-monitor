@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Data Agent 市场监控仪表板 | 2026-04-11</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0b0e;--s1:#111115;--s2:#18181d;--bd:#24242b;--t1:#e8e4df;--t2:#9a958e;--t3:#5a564f;--acc:#6366f1;--acc2:#818cf8;--grn:#22c55e;--red:#ef4444;--amb:#f59e0b;--cor:#f97066;--tea:#2dd4bf;--blu:#3b82f6;--pur:#a78bfa}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased}
+a{color:var(--acc2);text-decoration:none}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 48px}
+/* Header */
+.hd{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--bd)}
+.hd-t{font-size:20px;font-weight:700;color:#fff}
+.hd-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:.5px}
+.hd-link{font-size:12px;padding:6px 14px;border:1px solid var(--acc);border-radius:6px;color:var(--acc2);transition:all .2s}
+.hd-link:hover{background:var(--acc);color:#fff}
+/* KPI row */
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px}
+.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:3px solid var(--acc)}
+.kc:nth-child(2){border-left-color:var(--pur)}.kc:nth-child(3){border-left-color:var(--tea)}.kc:nth-child(4){border-left-color:var(--cor)}
+.kc-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.kc-v{font-size:28px;font-weight:700;color:#fff;margin:4px 0 2px}
+.kc-d{font-size:11px;color:var(--t2)}
+/* Section */
+.sec{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.sec-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:14px}
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:7px 10px;color:var(--t3);font-size:10px;text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--bd);font-weight:500}
+td{padding:8px 10px;border-bottom:.5px solid var(--bd);color:var(--t2)}
+td:first-child{color:var(--t1);font-weight:600}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:500}
+.b-hot{background:rgba(249,112,102,.1);color:var(--cor)}.b-new{background:rgba(59,130,246,.1);color:var(--blu)}.b-up{background:rgba(34,197,94,.1);color:var(--grn)}.b-std{background:rgba(255,255,255,.04);color:var(--t3)}
+/* Bar */
+.bar{height:5px;border-radius:3px;background:rgba(255,255,255,.04);margin-top:3px}
+.bf{height:100%;border-radius:3px}
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:500}
+/* 2-col */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* Insight */
+.ins{border-left:3px solid var(--pur);padding:14px 18px;margin-top:8px;font-size:12px;color:var(--t2);line-height:1.7}
+.ins b{color:var(--acc2);font-weight:600}
+/* Footer */
+.ft{text-align:center;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.5px}
+@media(max-width:640px){.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hd">
+<div><div class="hd-t">Data Agent 市场监控仪表板</div><div class="hd-sub">2026-04-11 | 创刊号</div></div>
+<a class="hd-link" href="./周报-2026-04-11.html" target="_blank">查看完整周报 →</a>
+</div>
+
+<div class="kpi">
+<div class="kc"><div class="kc-l">监控厂商</div><div class="kc-v">8</div><div class="kc-d">国内6 + 海外2</div></div>
+<div class="kc"><div class="kc-l">本周资讯</div><div class="kc-v">12</div><div class="kc-d">3 条重大动态</div></div>
+<div class="kc"><div class="kc-l">信息源覆盖</div><div class="kc-v">5类</div><div class="kc-d">官方/媒体/社区/报告/技术</div></div>
+<div class="kc"><div class="kc-l">趋势信号</div><div class="kc-v">3</div><div class="kc-d">架构/产品/治理</div></div>
+</div>
+
+<div class="sec">
+<div class="sec-t">厂商动态热力图</div>
+<table>
+<thead><tr><th>厂商</th><th>核心产品</th><th>最新动态</th><th>热度</th><th style="width:80px">活跃度</th></tr></thead>
+<tbody>
+<tr><td>思迈特</td><td>SmartBI 白泽</td><td><span class="badge b-hot">评测第一</span> IDC 7项全部第一</td><td>★★★★★</td><td><div class="bar"><div class="bf" style="width:95%;background:var(--cor)"></div></div></td></tr>
+<tr><td>Databricks</td><td>Genie Code</td><td><span class="badge b-new">重磅发布</span> 自主数据工程Agent</td><td>★★★★★</td><td><div class="bar"><div class="bf" style="width:92%;background:var(--blu)"></div></div></td></tr>
+<tr><td>阿里云</td><td>Quick BI 小Q</td><td><span class="badge b-up">全面升级</span> 5大Agent+信通院认证</td><td>★★★★</td><td><div class="bar"><div class="bf" style="width:82%;background:var(--grn)"></div></div></td></tr>
+<tr><td>Salesforce</td><td>Tableau Next</td><td><span class="badge b-new">定价重构</span> 角色定价取代按量计费</td><td>★★★★</td><td><div class="bar"><div class="bf" style="width:78%;background:var(--blu)"></div></div></td></tr>
+<tr><td>帆软</td><td>FineChatBI</td><td><span class="badge b-up">持续迭代</span> FineAI助手上线</td><td>★★★</td><td><div class="bar"><div class="bf" style="width:68%;background:var(--tea)"></div></div></td></tr>
+<tr><td>字节跳动</td><td>DataWind</td><td><span class="badge b-std">稳步推进</span> 评测第二，3.0架构</td><td>★★★</td><td><div class="bar"><div class="bf" style="width:65%;background:var(--tea)"></div></div></td></tr>
+<tr><td>观远数据</td><td>观远Agent</td><td><span class="badge b-up">三品齐发</span> 问数+洞察+DataFlow</td><td>★★★</td><td><div class="bar"><div class="bf" style="width:60%;background:var(--tea)"></div></div></td></tr>
+<tr><td>亿问</td><td>Data Agent</td><td><span class="badge b-std">深耕场景</span> 双引擎架构商业化</td><td>★★</td><td><div class="bar"><div class="bf" style="width:45%;background:rgba(255,255,255,.15)"></div></div></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="row2">
+<div class="sec">
+<div class="sec-t">技术趋势关键词</div>
+<div class="tags">
+<span class="tag" style="background:rgba(99,102,241,.1);color:var(--acc2)">Agentic Loop</span>
+<span class="tag" style="background:rgba(59,130,246,.1);color:var(--blu)">NL2MQL2SQL</span>
+<span class="tag" style="background:rgba(45,212,191,.1);color:var(--tea)">Semantic Layer</span>
+<span class="tag" style="background:rgba(249,112,102,.1);color:var(--cor)">多Agent协作3.0</span>
+<span class="tag" style="background:rgba(34,197,94,.1);color:var(--grn)">MCP/A2A标准化</span>
+<span class="tag" style="background:rgba(245,158,11,.1);color:var(--amb)">Governance-first</span>
+</div>
+</div>
+<div class="sec">
+<div class="sec-t">资讯来源分布</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--t2)">行业报告</span><div class="bar" style="width:90px"><div class="bf" style="width:90%;background:var(--blu)"></div></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--t2)">厂商官方</span><div class="bar" style="width:90px"><div class="bf" style="width:85%;background:var(--tea)"></div></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--t2)">科技媒体</span><div class="bar" style="width:90px"><div class="bf" style="width:75%;background:var(--pur)"></div></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--t2)">社区讨论</span><div class="bar" style="width:90px"><div class="bf" style="width:50%;background:var(--grn)"></div></div></div>
+</div>
+</div>
+</div>
+
+<div class="sec" style="border-left:3px solid var(--pur)">
+<div class="sec-t">本期核心判断</div>
+<div class="ins">
+<div style="margin-bottom:6px"><b>1. 工程化 > 模型参数：</b>Schema Linking + Agentic Loop 是准确率瓶颈突破关键，BIRD 基准 52.8% 标注错误警示行业需校准期望</div>
+<div style="margin-bottom:6px"><b>2. 增强式为主流，自主式在探索：</b>Databricks Genie Code 是首个走向自主工程化的产品，大规模落地预计 2027+</div>
+<div><b>3. 中国市场窗口期：</b>数据不出境+国产化政策为本土厂商创造 2026-2028 独特竞争优势</div>
+</div>
+</div>
+
+<div class="ft">
+<p>Data Agent 市场监控仪表板 · 创刊号 · 2026-04-11</p>
+<p style="margin-top:4px">Powered by Corevo</p>
+</div>
+</div>
+</body>
+</html>
