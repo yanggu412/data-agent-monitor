@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Data Agent 市场监控周报 | 2026-04-11</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0c;--surface:#111114;--surface2:#18181c;--border:#222228;--text:#e4e0db;--text2:#9a958e;--text3:#5a564f;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--coral:#f97066;--teal:#2dd4bf;--blue:#3b82f6;--purple:#a78bfa}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:#fff}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+a:hover{border-bottom-color:var(--accent2)}
+
+/* Hero */
+.hero{position:relative;padding:80px 0 60px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(99,102,241,.12),transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:-1px;color:#fff;line-height:1.2}
+.hero-meta{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:.5px}
+
+/* Layout */
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* TOC */
+.toc{margin:0 auto 48px;max-width:860px;padding:0 24px}
+.toc-inner{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 28px}
+.toc-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.toc-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 24px}
+.toc-list a{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;color:var(--text2);transition:color .2s;border-bottom:none}
+.toc-list a:hover{color:var(--accent2)}
+.toc-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);min-width:20px}
+
+/* Section */
+.section{margin-bottom:56px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.section h2{font-family:'Noto Serif SC',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.section h3{font-size:16px;font-weight:600;color:#fff;margin:32px 0 16px;display:flex;align-items:center;gap:8px}
+.section h4{font-size:14px;font-weight:600;color:var(--text);margin:24px 0 12px;padding-left:12px;border-left:3px solid var(--accent)}
+
+/* Highlights */
+.highlights{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.hl{display:flex;gap:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:border-color .2s}
+.hl:hover{border-color:var(--accent)}
+.hl-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent);min-width:28px;line-height:1.6}
+.hl-body{flex:1}
+.hl-title{font-weight:600;color:#fff;margin-bottom:2px}
+.hl-desc{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* Vendor Card */
+.vendor{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;transition:border-color .2s}
+.vendor:hover{border-color:rgba(99,102,241,.3)}
+.vendor-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.vendor-name{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:#fff}
+.vendor-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 10px;border-radius:12px;letter-spacing:.5px}
+.tag-hot{background:rgba(249,112,102,.1);color:var(--coral)}.tag-new{background:rgba(59,130,246,.1);color:var(--blue)}.tag-up{background:rgba(34,197,94,.1);color:var(--green)}.tag-std{background:rgba(255,255,255,.05);color:var(--text3)}
+.vendor p,.vendor li{font-size:14px;color:var(--text2);line-height:1.8}
+.vendor strong{color:var(--text);font-weight:600}
+.vendor ul{padding-left:18px;margin:8px 0}
+.vendor-src{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--text3)}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--surface2);text-align:left;padding:10px 14px;font-weight:600;color:var(--text2);font-size:12px;letter-spacing:.3px;white-space:nowrap}
+td{padding:10px 14px;border-top:1px solid var(--border);color:var(--text2)}
+td:first-child{color:var(--text);font-weight:500}
+tr:hover td{background:rgba(255,255,255,.015)}
+
+/* Info cards */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:16px 0}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.info-card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.info-card-title{font-weight:600;color:#fff;font-size:14px;margin-bottom:4px}
+.info-card-desc{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* Blockquote */
+blockquote{border-left:3px solid var(--accent);padding:12px 18px;margin:16px 0;background:var(--surface);border-radius:0 8px 8px 0;font-size:13px;color:var(--text2)}
+
+/* Trend */
+.trend-box{background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(167,139,250,.04));border:1px solid rgba(99,102,241,.15);border-radius:12px;padding:24px;margin:20px 0}
+.trend-box h4{border-left:none;padding-left:0;color:var(--accent2);margin-top:0}
+
+/* Footer */
+.footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);margin-top:48px}
+.footer p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.5px}
+
+/* Anim */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp .5s ease both}
+.section:nth-child(2){animation-delay:.05s}.section:nth-child(3){animation-delay:.1s}
+
+@media(max-width:600px){
+.hero{padding:48px 0 36px}
+.hero h1{font-size:28px}
+.container{padding:0 16px}
+.vendor{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<div class="container">
+<div class="hero-badge"><span class="hero-badge-dot"></span>Market Intelligence</div>
+<h1>Data Agent 市场监控周报</h1>
+<div class="hero-meta">2026-04-11 | 创刊号（第 1 期）| 8 Vendors Tracked</div>
+</div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+<div class="toc-title">Contents</div>
+<ul class="toc-list">
+<li><a href="#highlights"><span class="toc-num">01</span>本周要点速览</a></li>
+<li><a href="#domestic"><span class="toc-num">02</span>国内厂商动态</a></li>
+<li><a href="#overseas"><span class="toc-num">03</span>海外厂商动态</a></li>
+<li><a href="#news"><span class="toc-num">04</span>市场资讯聚合</a></li>
+<li><a href="#trends"><span class="toc-num">05</span>产品研究与趋势</a></li>
+<li><a href="#outlook"><span class="toc-num">06</span>未来展望</a></li>
+</ul>
+</div></nav>
+
+<div class="container">
+
+<!-- Highlights -->
+<div class="section" id="highlights">
+<div class="section-label">Section 01</div>
+<h2>本周要点速览</h2>
+<div class="highlights">
+<div class="hl"><div class="hl-num">1</div><div class="hl-body"><div class="hl-title">Databricks 发布 Genie Code</div><div class="hl-desc">业界首个自主完成数据 Pipeline 构建、模型训练、Debug 到 Dashboard 发布的 Coding Agent，成功率超主流 Agent 2 倍，标志 Data Agent 进入「自主工程化」阶段</div></div></div>
+<div class="hl"><div class="hl-num">2</div><div class="hl-body"><div class="hl-title">思迈特 SmartBI 白泽登顶评测第一</div><div class="hl-desc">IDC 7 项平台能力全部第一，成为唯一入选「中国 AI 智能体百强」的原生 BI 厂商</div></div></div>
+<div class="hl"><div class="hl-num">3</div><div class="hl-body"><div class="hl-title">Salesforce 定价体系重构</div><div class="hl-desc">废除 Flex Credit 计量消耗制，改为角色定价（Consumer/Creator），数据查询分析不再按量计费</div></div></div>
+<div class="hl"><div class="hl-num">4</div><div class="hl-body"><div class="hl-title">阿里云 Quick BI 5 大 Agent 体系升级</div><div class="hl-desc">报告 Agent、知识库全面升级，通过信通院首批 AI Agent 专项评测</div></div></div>
+<div class="hl"><div class="hl-num">5</div><div class="hl-body"><div class="hl-title">Text-to-SQL 基准失真</div><div class="hl-desc">CIDR'26 论文揭示 BIRD 标注错误率 52.8%，Spider 2.0 真实场景 GPT-5 准确率不足 20%</div></div></div>
+</div>
+</div>
+
+<!-- Domestic -->
+<div class="section" id="domestic">
+<div class="section-label">Section 02</div>
+<h2>国内厂商动态</h2>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">字节跳动 · 火山引擎 DataWind</div><span class="vendor-tag tag-std">稳步推进</span></div>
+<p><strong>产品现状：</strong>DataWind 深度集成豆包大模型，提供 ChatBI 问数、自动归因、趋势预测、报告生成等 AI 能力。技术架构已演进至 3.0 版本——数据探查 Agent + 数据洞察 Agent + 上下文引擎 + Agent Workspace 四模块协作。</p>
+<ul>
+<li>2026年3月行业评测中综合排名第二，"通用大模型能力突出，适合快速验证和轻量级应用"</li>
+<li>关键洞察：单 Agent 有效工具上限约 15 个，超出需转向 Supervisor 多 Agent 模式</li>
+<li>数据智能业务独立成线，强化与豆包 AI 协同</li>
+</ul>
+<p><strong>商业化：</strong>云订阅制为主，Data Agent 以增值模块叠加销售，主攻互联网/电商/消费品客群。</p>
+<div class="vendor-src">来源：<a href="https://www.ithome.com/0/928/634.htm">IT之家评测</a> · <a href="https://www.volcengine.com/product/datawind">火山引擎官网</a> · <a href="https://www.cnblogs.com/bytedata/p/19111683">架构实录</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">阿里云 · Quick BI / 智能小Q</div><span class="vendor-tag tag-up">全面升级</span></div>
+<p><strong>产品现状：</strong>连续 6 年入选 Gartner ABI 魔力象限（中国唯一），核心战略升级为 5 大 Agent 驱动——报告/问数/解读/洞察/搭建。</p>
+<ul>
+<li>企业知识库升级，支持直连第三方知识库/本地文件</li>
+<li>报告 Agent 升级：编辑时可直接唤起多维度归因</li>
+<li>通过信通院"AI Agent 智能体产业图谱"专项评测（首批）</li>
+<li>推出 Quick BI + RDS DuckDB 免费组合包引流</li>
+</ul>
+<p><strong>商业化：</strong>四档年订阅，AI Agent 以高阶版本/增值包销售，付费小Q客户超百家。</p>
+<div class="vendor-src">来源：<a href="https://www.aliyun.com/product/quick-bi">阿里云 Quick BI</a> · <a href="https://help.aliyun.com/zh/quick-bi/user-guide/intelligent-data-reporting">小Q报告文档</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">帆软 · FineBI / FineChatBI</div><span class="vendor-tag tag-up">持续迭代</span></div>
+<p><strong>产品现状：</strong>国内 BI 市场份额长期领先，战略定位 <strong>"AI For BI"</strong>。核心产品线：FineChatBI（对话式取数）、FineBI 内嵌 FineAI 助手（V3.24.0）、FineReport（AI 辅助报表设计）、FineDataLink（数据集成底座）。</p>
+<ul>
+<li>FineAI 助手支持接入 DeepSeek/通义千问等 OpenAI 标准接口</li>
+<li>研发资源向 AI 倾斜，FineChatBI 作为下一代核心产品持续迭代</li>
+</ul>
+<p><strong>商业化：</strong>FineReport 永久授权+年维护；FineBI 免费个人版+企业版订阅。核心竞争力在私有化部署，政企/金融/制造渗透率高，非上市，外界估值独角兽级。</p>
+<div class="vendor-src">来源：<a href="https://help.fanruan.com/finebi/doc-view-2647.html">FineBI AI 助手文档</a> · <a href="https://www.fanruan.com/zh-tw/blog/blog-future-of-bi">帆软趋势分析</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">观远数据 · 观远Agent</div><span class="vendor-tag tag-up">三品齐发</span></div>
+<p><strong>产品现状：</strong>消费品/零售行业 BI 标杆厂商，2024-2025 年推出问数 Agent、洞察 Agent、DataFlow 三款新品。</p>
+<ul>
+<li>持续强化"问数 → 洞察 → 决策"闭环</li>
+<li>推进全面信创适配，产品自主可控</li>
+</ul>
+<p><strong>商业化：</strong>SaaS 订阅+私有化双模，已完成 D 轮融资（红杉中国、高榕资本等）。</p>
+<div class="vendor-src">来源：<a href="https://www.guandata.com">观远数据官网</a> · <a href="https://www.guandata.com/blogdetail/ganhuo_0115">产品博客</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">亿问 · Data Agent</div><span class="vendor-tag tag-std">深耕场景</span></div>
+<p><strong>产品现状：</strong>独创 <strong>NL2LF2SQL 双引擎架构</strong>——逻辑引擎（图计算+符号逻辑，GPU=0 Token=0）+ 语义引擎（Transformer），Token 消耗降低 65%，语义定位准确率 99.8%。</p>
+<p><strong>典型客户：</strong>麦当劳、蜜雪冰城、康师傅、理想汽车、华为、银联商务等。</p>
+<p><strong>商业化：</strong>企业定制化方案为主，偏中大型企业客户。</p>
+<div class="vendor-src">来源：<a href="https://yiwendata.com/">亿问数据官网</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">思迈特 · SmartBI 白泽</div><span class="vendor-tag tag-hot">评测第一</span></div>
+<p><strong>产品现状：</strong>定位"智能体数据决策分析平台"，多智能体协同 + 可视化工作流编排 + RAG知识增强 + ReAct推理 + MCP/A2A协议兼容 + 指标模型引擎（准确率 ≥98%）。</p>
+<ul>
+<li><strong>2026年1月：</strong>白泽入选《中国 AI 智能体百强》，<strong>唯一原生 BI 厂商</strong></li>
+<li><strong>2026年3月：</strong>IT之家评测<strong>第一</strong>，IDC 7项平台能力全部第一，金融/央国企满分</li>
+<li>累计 80+ 软著、近 20 项发明专利，<strong>发明专利数 BI 行业第一</strong></li>
+</ul>
+<p><strong>商业化：</strong>私有化部署高客单价（金融/央国企），平台授权+实施+年维护，深耕 15 年。</p>
+<div class="vendor-src">来源：<a href="https://www.smartbi.com.cn">SmartBI 官网</a> · <a href="https://www.icloudnews.net/a/112630.html">AI百强入选</a> · <a href="https://www.ithome.com/0/928/634.htm">IT之家评测</a></div>
+</div>
+</div>
+
+<!-- Overseas -->
+<div class="section" id="overseas">
+<div class="section-label">Section 03</div>
+<h2>海外厂商动态</h2>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">Salesforce · Agentforce + Tableau AI</div><span class="vendor-tag tag-new">定价重构</span></div>
+<p><strong>产品现状：</strong>Tableau Next 基于 Data 360 + Hyperforce 架构重构，原生集成 Agentforce，发布 Agentic Analytics + Concierge。</p>
+<ul>
+<li>废除 Flex Credit，改为角色定价（Consumer/Creator），数据查询分析不再按量计费</li>
+<li>FY26 Agentic + Informatica ARR 达 $2.9B；Data 360 摄入量 112T+ 行</li>
+<li>核心定位："解决 BI 最后一英里的可执行性鸿沟"</li>
+</ul>
+<div class="vendor-src">来源：<a href="https://www.tableau.com/pricing">Tableau 定价</a> · <a href="https://futurumgroup.com/insights/can-salesforces-data-360-pricing-overhaul-deliver-predictable-roi/">Futurum 分析</a> · <a href="https://www.tableau.com/blog/tableau-agentic-analytics-tableau-next-gartner-bi-bake-off">Agentic Analytics</a></div>
+</div>
+
+<div class="vendor">
+<div class="vendor-head"><div class="vendor-name">Databricks · Genie Code / DIP</div><span class="vendor-tag tag-hot">重磅发布</span></div>
+<p><strong>产品现状：</strong>以技术深度和开放架构取胜。</p>
+<ul>
+<li><strong>Genie Code（2026-03-11）：</strong>自主完成 Pipeline→模型训练→Debug→Dashboard 全流程，成功率超主流 Agent 2 倍</li>
+<li><strong>Lakebase GA：</strong>面向 AI Agent 的 Serverless Postgres，覆盖全球 14 个 Azure 区域</li>
+<li>Genie MAU YoY <strong>+300%</strong>，多智能体工作流 <strong>+327%</strong></li>
+<li>开源策略：Unity Catalog 开放治理基座，Lakeflow Connect 免费层 100 DBU/天</li>
+</ul>
+<div class="vendor-src">来源：<a href="https://www.prnewswire.com/news-releases/databricks-launches-genie-code-bringing-agentic-engineering-to-data-work-302711090.html">Genie Code 发布</a> · <a href="https://www.databricks.com/blog/whats-new-azure-databricks-fabcon-2026-lakebase-lakeflow-and-genie">FabCon 2026</a> · <a href="https://www.verdantix.com/client-portal/blog/databricks-bets-on-ai-agents-for-autonomous-data-engineering-with-genie-code">Verdantix 分析</a></div>
+</div>
+</div>
+
+<!-- News -->
+<div class="section" id="news">
+<div class="section-label">Section 04</div>
+<h2>市场资讯聚合</h2>
+
+<h3>科技媒体报道</h3>
+<div class="tbl-wrap"><table>
+<thead><tr><th>来源</th><th>主题</th><th>核心观点</th><th>链接</th></tr></thead>
+<tbody>
+<tr><td>甲子光年</td><td>2026 Agent 十大趋势</td><td>Agent Infra 成新时代操作系统</td><td><a href="https://www.jazzyear.com/study_info.html?id=161">阅读</a></td></tr>
+<tr><td>36氪</td><td>请回答 2026</td><td>Coding Agent 进入生产级，Data Agent 紧随其后</td><td><a href="https://eu.36kr.com/zh/p/3681460878175878">阅读</a></td></tr>
+<tr><td>爱分析</td><td>Agent 厂商全景报告</td><td>NL2MQL2SQL 语义层路线兴起</td><td><a href="https://www.smartcity.team/reports/2025aiagent厂商全景报告/">阅读</a></td></tr>
+</tbody></table></div>
+
+<h3>行业报告与研究</h3>
+<div class="tbl-wrap"><table>
+<thead><tr><th>机构</th><th>报告</th><th>核心判断</th><th>链接</th></tr></thead>
+<tbody>
+<tr><td>IDC FutureScape</td><td>中国 AI Agent 十大预测</td><td>50% 中国 500 强将部署分析 Agent</td><td><a href="https://www.idc.com/resource-center/blog/当数据开始为agent而生：idc-futurescape-2026-给中国企业的十大关键/">阅读</a></td></tr>
+<tr><td>Databricks</td><td>State of AI Agents</td><td>治理与可观测性是规模化最大瓶颈</td><td><a href="https://www.databricks.com/resources/ebook/state-of-ai-agents">阅读</a></td></tr>
+<tr><td>CIDR'26</td><td>Text-to-SQL Benchmarks are Broken</td><td>BIRD 标注错误率 52.8%</td><td><a href="https://www.vldb.org/cidrdb/papers/2026/p5-jin.pdf">阅读</a></td></tr>
+</tbody></table></div>
+
+<h3>社区热点</h3>
+<div class="info-grid">
+<div class="info-card"><div class="info-card-label">知乎</div><div class="info-card-title">Text-to-SQL 技术路线热议</div><div class="info-card-desc">MoE 轻量化模型（Qwen3-Next 80B-A3B）在数据分析场景的应用成为焦点</div></div>
+<div class="info-card"><div class="info-card-label">技术社区</div><div class="info-card-title">DeepAnalyze 开源关注</div><div class="info-card-desc">开源 Data Agent（1500+ Stars），作为自主式 Agent 探索方向引发关注</div></div>
+</div>
+</div>
+
+<!-- Trends -->
+<div class="section" id="trends">
+<div class="section-label">Section 05</div>
+<h2>产品研究与趋势</h2>
+
+<h3>技术架构趋势</h3>
+
+<h4>Text-to-SQL：从"能用"到"可信"</h4>
+<p>当前 SOTA 在 BIRD 榜单达 71.83%，但 BIRD 存在 52.8% 标注错误，Spider 2.0 真实场景 GPT-5 准确率不足 20%。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>破局手段</th><th>原理</th><th>代表</th></tr></thead>
+<tbody>
+<tr><td>Schema Linking</td><td>图谱化字段映射，解决晦涩命名</td><td>中国电信星海智文（BIRD Top 4）</td></tr>
+<tr><td>Agentic Loop</td><td>生成 → 沙箱试运行 → 自反思修正</td><td>火山引擎 3.0、SmartBI 白泽</td></tr>
+<tr><td>NL2MQL2SQL</td><td>插入指标语义层，从源头降低幻觉</td><td>Aloudata、Tableau、GoodData</td></tr>
+</tbody></table></div>
+
+<h4>多 Agent 协作进入 3.0 阶段</h4>
+<div class="tbl-wrap"><table>
+<thead><tr><th>阶段</th><th>架构</th><th>局限</th></tr></thead>
+<tbody>
+<tr><td>1.0</td><td>Plan-Execute 静态</td><td>灵活性不足</td></tr>
+<tr><td>2.0</td><td>One Agent 动态</td><td>工具上限约 15 个</td></tr>
+<tr><td style="color:var(--accent2);font-weight:600">3.0（当前）</td><td>Supervisor + 专业 Worker Agent</td><td>需要精细编排</td></tr>
+</tbody></table></div>
+
+<h3>产品发展趋势</h3>
+
+<div class="trend-box">
+<h4>两大行业共识</h4>
+<p><strong>1. Governance-first：</strong>Salesforce 和 Databricks 均将数据治理作为 Agent 时代核心基础设施。微软调研显示 29% 员工已在使用未授权 AI Agent，"影子 AI"成最大治理黑洞。</p>
+<p style="margin-top:8px"><strong>2. Semantic Layer 升格为战略资产：</strong>AI Agent 与传统 BI 的融合点在语义层，拥有高质量语义层和业务 Know-How 的厂商获超额溢价。</p>
+</div>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>演进阶段</th><th>时间</th><th>特征</th><th>代表</th></tr></thead>
+<tbody>
+<tr><td>Chat BI</td><td>2022-2023</td><td>NL2SQL 包装，用户主动驱动</td><td>ThoughtSpot 早期</td></tr>
+<tr><td style="color:var(--accent2);font-weight:600">增强式 Agent（主流）</td><td>2024-2025</td><td>多轮对话+异常检测+报告生成</td><td>SmartBI 白泽、火山引擎</td></tr>
+<tr><td>自主式 Agent（探索）</td><td>2026→2027+</td><td>自主计划、执行代码、触发业务动作</td><td>Databricks Genie Code</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- Outlook -->
+<div class="section" id="outlook">
+<div class="section-label">Section 06</div>
+<h2>未来展望</h2>
+
+<div class="info-grid">
+<div class="info-card" style="border-left:3px solid var(--accent)"><div class="info-card-label">短期 2026</div><div class="info-card-title">工程化准确率竞争</div><div class="info-card-desc">Schema Linking 质量、元数据管理、Agentic Loop 调优成核心壁垒</div></div>
+<div class="info-card" style="border-left:3px solid var(--teal)"><div class="info-card-label">中期 2027-2028</div><div class="info-card-title">分析即行动</div><div class="info-card-desc">Agent 从"回答问题"转向"主动监控 KPI + 触发 ERP/CRM 动作"</div></div>
+</div>
+
+<h4>三大可能技术突破</h4>
+<div class="highlights">
+<div class="hl"><div class="hl-num" style="color:var(--teal)">1</div><div class="hl-body"><div class="hl-title">数据专域模型</div><div class="hl-desc">通过真实场景 Agentic Training 训练的专域模型将显著超越通用 LLM</div></div></div>
+<div class="hl"><div class="hl-num" style="color:var(--teal)">2</div><div class="hl-body"><div class="hl-title">MoE 轻量化降成本</div><div class="hl-desc">Qwen3-Next 等 MoE 模型推理吞吐比稠密模型快 10 倍+，可部署到企业私有环境</div></div></div>
+<div class="hl"><div class="hl-num" style="color:var(--teal)">3</div><div class="hl-body"><div class="hl-title">A2A/MCP 协议标准化</div><div class="hl-desc">不同厂商 Data Agent 可互操作，BI 平台从"全栈产品"演变为"Agent 生态市场"</div></div></div>
+</div>
+
+<blockquote>中国市场数据不出境 + 国产化政策为本土厂商创造 2026-2028 年独特竞争窗口期。BI 工具用户渗透率将从 15-20% 跃升至 60%+。竞争逻辑从"工具功能"转向"所能产生的智能质量"。</blockquote>
+</div>
+
+</div>
+
+<div class="footer">
+<p>Data Agent 市场监控周报 · 创刊号 · 2026-04-11</p>
+<p style="margin-top:6px">Powered by Corevo</p>
+</div>
+
+</body>
+</html>
