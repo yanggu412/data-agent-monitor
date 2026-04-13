@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Agent 市场监控周报 | 2026-04-13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0c;--surface:#111115;--surface2:#18181d;--surface3:#222228;
+  --border:#2a2a32;--border2:#363640;
+  --text:#e8e8ed;--text2:#a0a0b0;--text3:#6a6a7a;
+  --accent:#6c8cff;--accent2:#8b5cf6;--green:#34d399;--amber:#fbbf24;--rose:#f472b6;--cyan:#22d3ee;
+  --serif:'Noto Serif SC',Georgia,serif;--sans:'Noto Sans SC','Helvetica Neue',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:#93b0ff;text-decoration:underline}
+
+/* Layout */
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+header{padding:60px 0 40px;border-bottom:1px solid var(--border)}
+header .badge{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+header h1{font-family:var(--serif);font-size:clamp(28px,5vw,38px);font-weight:700;line-height:1.3;margin-bottom:8px}
+header .meta{color:var(--text3);font-size:13px;font-family:var(--mono)}
+
+/* Nav TOC */
+nav.toc{position:sticky;top:0;z-index:100;background:rgba(10,10,12,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0;margin-bottom:32px}
+nav.toc .container{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+nav.toc .container::-webkit-scrollbar{display:none}
+nav.toc a{flex-shrink:0;font-size:12px;font-weight:500;color:var(--text3);padding:6px 14px;border-radius:20px;border:1px solid transparent;transition:all .2s;text-decoration:none}
+nav.toc a:hover{color:var(--text);border-color:var(--border2)}
+nav.toc a.active{color:var(--accent);border-color:var(--accent);background:rgba(108,140,255,.08)}
+
+/* Sections */
+section{padding:40px 0}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:24px}
+h3{font-size:17px;font-weight:600;margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h3 .vendor-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Highlight Cards */
+.highlights{display:grid;gap:12px;margin-bottom:8px}
+.highlight-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s}
+.highlight-card:hover{border-color:var(--border2)}
+.highlight-num{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);flex-shrink:0;width:28px;text-align:center;line-height:1.6}
+.highlight-text{font-size:14px;line-height:1.7}
+.highlight-text strong{color:#fff}
+
+/* Vendor Cards */
+.vendor-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;transition:border-color .3s}
+.vendor-card:hover{border-color:var(--border2)}
+.vendor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.vendor-name{font-family:var(--serif);font-size:19px;font-weight:700}
+.vendor-product{font-size:12px;color:var(--text3);font-family:var(--mono);background:var(--surface2);padding:3px 10px;border-radius:6px}
+.vendor-card h4{font-size:13px;font-weight:600;color:var(--text2);margin:16px 0 8px;letter-spacing:.5px}
+.vendor-card ul{padding-left:18px;margin-bottom:8px}
+.vendor-card li{font-size:14px;margin-bottom:6px;color:var(--text2)}
+.vendor-card li::marker{color:var(--text3)}
+.judgment{background:var(--surface2);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13px;color:var(--text2);line-height:1.7}
+.source{font-size:12px;color:var(--text3);margin-top:12px}
+.source a{color:var(--text3);font-size:12px}
+.source a:hover{color:var(--accent)}
+
+/* Region Tag */
+.region-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-bottom:20px}
+.region-tag.cn{background:rgba(251,191,36,.12);color:var(--amber)}
+.region-tag.global{background:rgba(34,211,238,.12);color:var(--cyan)}
+
+/* Table */
+.table-wrap{overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:var(--surface2)}
+th{text-align:left;padding:12px 16px;font-weight:600;color:var(--text2);font-size:11px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+td{padding:12px 16px;border-top:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(108,140,255,.04)}
+td:first-child{font-weight:600;color:#fff;white-space:nowrap}
+
+/* Trend Tags */
+.trend-tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.trend-tag{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border);color:var(--text2);transition:all .2s}
+.trend-tag:hover{border-color:var(--accent);color:var(--accent)}
+.trend-tag.hot{border-color:var(--rose);color:var(--rose);background:rgba(244,114,182,.06)}
+
+/* Outlook */
+.outlook-list{counter-reset:outlook}
+.outlook-item{counter-increment:outlook;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:12px;position:relative;padding-left:56px}
+.outlook-item::before{content:counter(outlook);position:absolute;left:20px;top:20px;font-family:var(--mono);font-size:18px;font-weight:700;color:var(--accent2)}
+.outlook-item p{font-size:14px;color:var(--text2);line-height:1.7}
+.outlook-item strong{color:var(--text)}
+
+/* Footer */
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center}
+footer p{font-size:12px;color:var(--text3);line-height:1.8;font-family:var(--mono)}
+
+/* Responsive */
+@media(max-width:640px){
+  .container{padding:0 16px}
+  header{padding:40px 0 28px}
+  header h1{font-size:24px}
+  .vendor-card{padding:18px 20px}
+  .highlight-card{padding:14px 16px}
+  .outlook-item{padding-left:44px}
+  .outlook-item::before{left:14px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">Market Intelligence</div>
+    <h1>Data Agent 市场监控周报</h1>
+    <div class="meta">2026-04-13 · 第 15 期 · 覆盖 8 家厂商</div>
+  </div>
+</header>
+
+<nav class="toc" id="toc">
+  <div class="container">
+    <a href="#highlights">要点速览</a>
+    <a href="#domestic">国内厂商</a>
+    <a href="#global">海外厂商</a>
+    <a href="#market">市场资讯</a>
+    <a href="#trends">产品趋势</a>
+    <a href="#landscape">竞争格局</a>
+    <a href="#outlook">展望</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== 要点速览 ===== -->
+<section id="highlights">
+<div class="container">
+  <div class="section-label">Executive Summary</div>
+  <h2>要点速览</h2>
+  <div class="highlights">
+    <div class="highlight-card">
+      <div class="highlight-num">1</div>
+      <div class="highlight-text"><strong>Salesforce Tableau Next 正式定义"Agentic Analytics"赛道</strong> — API-first 架构 + MCP 协议 + Agentforce 深度集成，率先将 Agent 能力嵌入全平台。</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">2</div>
+      <div class="highlight-text"><strong>思迈特 SmartBI 白泽 IDC 七项能力全部第一</strong> — 多智能体协同 + 工作流编排 + 指标语义底座的三层架构获行业权威认可。</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">3</div>
+      <div class="highlight-text"><strong>字节火山引擎 DataAgent 加速通用模型驱动路线</strong> — 依托豆包大模型快速迭代，以深度语境理解和云生态整合为差异化卖点。</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">4</div>
+      <div class="highlight-text"><strong>亿问 Data Agent 与 SelectDB 完成互认证</strong> — NL2LF2SQL 架构 + 高性能 OLAP 引擎联合攻克 AI 数据幻觉问题。</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">5</div>
+      <div class="highlight-text"><strong>多 Agent 系统成为企业级 Data Agent 标配架构</strong> — Gartner、a16z 均指出 2026 年进入规模化采用阶段。</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">6</div>
+      <div class="highlight-text"><strong>IDC FutureScape 2026：80% AI Agent 将需要实时上下文数据</strong> — 倒逼企业从集中式数据供给转向联合治理。</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== 国内厂商 ===== -->
+<section id="domestic">
+<div class="container">
+  <div class="section-label">Domestic Vendors</div>
+  <h2>国内厂商动态</h2>
+  <span class="region-tag cn">中国市场 · 6 家</span>
+
+  <!-- 字节跳动 -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--cyan)">字节跳动</span>
+      <span class="vendor-product">DataAgent / DataWind</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>火山引擎 Data Agent 在 IT 之家横评中定位为"通用模型驱动分析工具"，强调模型迭代节奏快、生态整合能力突出。</li>
+      <li>产品核心依托豆包大模型，具备深度语境理解、洞察行动等能力，面向创新型企业和技术驱动型团队。</li>
+      <li>DataWind 持续作为字节内部及外部客户的数据分析底座，与 Data Agent 形成"传统 BI + AI Agent"双轨体系。</li>
+    </ul>
+    <div class="judgment">字节的优势在于通用模型迭代速度和云生态整合，但在企业级深度 BI know-how、复杂业务语义和大型企业定制化交付方面，仍面临传统 BI 厂商的竞争压力。</div>
+    <div class="source">来源：<a href="https://www.ithome.com/0/934/485.htm" target="_blank">IT之家 - AI自助数据分析工具选型</a></div>
+  </div>
+
+  <!-- 阿里云 -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--amber)">阿里云</span>
+      <span class="vendor-product">Quick BI / AgentBay</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>Quick BI 定位为"云生态自助分析工具"，适合中小团队快速启动轻量分析场景。</li>
+      <li>圣迪乐等标杆客户采用瓴羊 Quick BI 打通多源数据，运营效率提升 40%。</li>
+      <li>阿里云无影 AgentBay 在 IDC 报告中总分排名第一，Skills 生态超 1200 个，具备 Agent "自进化"能力。</li>
+    </ul>
+    <div class="judgment">阿里云在 Agent 基础设施（AgentBay）层面领先，但 Quick BI 自身在面对复杂企业需求和深入智能分析闭环时，支持边界仍需进一步验证。</div>
+    <div class="source">来源：<a href="https://bbs.huaweicloud.com/blogs/473511" target="_blank">华为云社区 - 2026 BI工具横评</a> · <a href="https://cn.aliyun.com/analyst-reports/idc-agentbay-2026" target="_blank">阿里云 IDC AgentBay 报告</a></div>
+  </div>
+
+  <!-- 帆软 -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--green)">帆软</span>
+      <span class="vendor-product">FineBI / FineChatBI</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>帆软持续强化 FineBI 在企业级自助分析领域的基础能力，通过 FineChatBI 探索对话式数据分析入口。</li>
+      <li>2026 年策略偏向"稳健落地"，以庞大存量客户群体为基础，逐步融入 AI 问数能力。</li>
+      <li>在 DACon 2026 等行业会议中保持活跃，但尚未发布重大 Agent 架构升级。</li>
+    </ul>
+    <div class="judgment">帆软凭借国内最大的 BI 装机量拥有天然优势，但在 AI Agent 深度融合方面进度相对保守，面临新锐 Agent BI 厂商的侧翼竞争。</div>
+    <div class="source">来源：行业观察综合分析</div>
+  </div>
+
+  <!-- 观远数据 -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--accent2)">观远数据</span>
+      <span class="vendor-product">智能决策平台</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>合伙人严林刚在 DACon 2026 上海站发表主题演讲"从数据分析到业务决策"。</li>
+      <li>产品线从传统 BI 向"智能决策平台"演进，强调从分析到决策的闭环能力。</li>
+      <li>持续聚焦零售、消费等行业垂直场景，以行业 know-how 深度为差异化竞争点。</li>
+    </ul>
+    <div class="judgment">观远数据在"分析→决策"闭环方向上的探索值得关注，DACon 演讲释放出其正在加速 AI 与决策融合的信号。</div>
+    <div class="source">来源：<a href="https://www.bagevent.com/event/9108668" target="_blank">DACon 2026 上海站议程</a></div>
+  </div>
+
+  <!-- 亿问 -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--rose)">亿问数据</span>
+      <span class="vendor-product">亿问 Data Agent</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>2026 年 1 月，与 SelectDB（基于 Apache Doris 的高性能 OLAP 引擎）完成产品兼容性互认证。</li>
+      <li>核心技术架构 NL2LF2SQL（自然语言→逻辑表达式→SQL），通过逻辑与 SQL 表达的解耦攻克幻觉问题。</li>
+      <li>聚焦企业级可信辅助决策平台定位，强调"零幻觉"数据获取能力和深度归因分析。</li>
+    </ul>
+    <div class="judgment">亿问的 NL2LF2SQL 架构在准确性保障方面具有技术差异化，与 SelectDB 的联合认证扩展了其在高性能实时分析场景的适用性。</div>
+    <div class="source">来源：<a href="https://www.selectdb.com/blog/1608" target="_blank">SelectDB 官方博客 - 与亿问互认证</a></div>
+  </div>
+
+  <!-- 思迈特 -->
+  <div class="vendor-card" style="border-color:var(--accent2)">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:#a78bfa">思迈特</span>
+      <span class="vendor-product">SmartBI 白泽</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>IDC《中国 GenBI 厂商技术能力评估》中，SmartBI 白泽 <strong style="color:var(--amber)">7 项平台技术能力评分全部第一</strong>，金融与央国企行业能力维度满分。</li>
+      <li>定位"大型企业专属智能体数据决策分析平台"，已落地百余个 AI 应用项目，服务 5000+ 客户。</li>
+      <li>核心架构："AI Agent + LLM + 指标模型 + 数据模型"四层一体，支持多智能体协同、工作流编排、MCP/A2A 扩展。</li>
+      <li>准确率宣称可达 98% 以上，支持亿级数据秒级响应。</li>
+    </ul>
+    <div class="judgment">思迈特在国内 Agent BI 赛道的领先地位进一步巩固，尤其在金融、央国企等高合规要求场景。其"指标语义底座 + 多 Agent 协同 + 工作流"的组合形成了显著壁垒。</div>
+    <div class="source">来源：<a href="https://i.ifeng.com/c/8rSLTRorpnY" target="_blank">凤凰网 - Data Agent产品排行榜</a> · <a href="https://www.ithome.com/0/932/288.htm" target="_blank">IT之家 - 数据分析系统推荐</a></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== 海外厂商 ===== -->
+<section id="global">
+<div class="container">
+  <div class="section-label">Global Vendors</div>
+  <h2>海外厂商动态</h2>
+  <span class="region-tag global">全球市场 · 2 家</span>
+
+  <!-- Salesforce -->
+  <div class="vendor-card" style="border-color:var(--accent)">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--accent)">Salesforce</span>
+      <span class="vendor-product">Agentforce + Tableau Next</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li><strong style="color:var(--amber)">Tableau Next 正式确立"Agentic Analytics"品类</strong>，以 API-first 的可组合架构重新定义 BI 产品形态。</li>
+      <li>核心能力矩阵：Tableau Semantics（统一语义层）、Tableau Pulse（主动式洞察推送）、Agentforce 深度集成、MCP 协议支持。</li>
+      <li>MCP 支持：任意 AI 客户端可通过 MCP 连接 Tableau 数据源，使 Tableau 成为"Data Agent 的语义中枢"。</li>
+      <li>基于 Hyperforce 云架构，保障企业级安全、合规与敏捷性。</li>
+    </ul>
+    <div class="judgment">Tableau Next 是当前全球 Data Agent 赛道最完整的产品愿景——从语义层、Agent 集成、MCP 生态到主动洞察推送，构建了完整的 Agentic Analytics 技术栈。其 MCP 协议开放策略意味着 Tableau 正从"可视化工具"转型为"数据 Agent 的基础设施"。</div>
+    <div class="source">来源：<a href="https://www.tableau.com/products/tableau-next" target="_blank">Tableau 官网</a> · <a href="https://www.tableau.com/agentic-analytics" target="_blank">Agentic Analytics</a> · <a href="https://biztory.com/blog/ultimate-guide-to-tableau-next-agentic-analytics" target="_blank">Biztory 深度解读</a></div>
+  </div>
+
+  <!-- Databricks -->
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name" style="color:var(--green)">Databricks</span>
+      <span class="vendor-product">Genie</span>
+    </div>
+    <h4>最新动态</h4>
+    <ul>
+      <li>Genie 持续作为 Databricks 数据智能平台的 AI 分析入口，与 Unity Catalog 深度绑定。</li>
+      <li>2026 年重点推进 Agentic Workflows 与 Vector Database 融合，支持更复杂的多步推理和分析任务。</li>
+      <li>核心演进：Text-to-SQL → Agentic SQL — Agent 不仅生成 SQL，还能自主执行、验证、迭代优化结果。</li>
+      <li>社区反馈（Reddit）：给予 LLM 工具执行 SQL、检查输出、自主修正的能力后，实用性显著提升。</li>
+    </ul>
+    <div class="judgment">Databricks 在数据平台层面的优势为 Genie 提供了天然的数据治理和安全基础。其从 Text-to-SQL 到 Agentic SQL 的演进路线，代表了数据平台型厂商进入 Data Agent 赛道的典型策略。</div>
+    <div class="source">来源：<a href="https://www.grapestechsolutions.com/blog/sql-in-age-of-ai-text-to-sql-llm/" target="_blank">Grapes Tech</a> · <a href="https://www.reddit.com/r/dataengineering/comments/1s3kohg/text_to_sql_in_2026/" target="_blank">Reddit r/dataengineering</a></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== 市场资讯 ===== -->
+<section id="market">
+<div class="container">
+  <div class="section-label">Market Intelligence</div>
+  <h2>市场资讯与行业报告</h2>
+
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name">IDC FutureScape 2026</span>
+      <span class="vendor-product">行业预测</span>
+    </div>
+    <h4>当数据开始为 Agent 而生</h4>
+    <ul>
+      <li><strong>数据和 AI 联合治理</strong>：到 2027 年，80% 的 AI Agent 将需要访问实时、上下文相关的数据。</li>
+      <li><strong>融合工作负载</strong>：到 2028 年，60% 的企业数据平台将搭建 HTAP 架构。</li>
+      <li><strong>数据协作</strong>：到 2029 年，60% 的企业将通过私有数据交换方式进行数据协作。</li>
+      <li><strong>数据重拾</strong>：到 2028 年，超 40% 的归档数据将被 AI 重新识别为"战略性数据"。</li>
+    </ul>
+    <div class="source">来源：<a href="https://www.idc.com/resource-center/blog/" target="_blank">IDC - FutureScape 2026</a></div>
+  </div>
+
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name">Gartner / a16z</span>
+      <span class="vendor-product">行业分析</span>
+    </div>
+    <h4>多 Agent 系统进入规模化采用</h4>
+    <ul>
+      <li>Gartner 指出企业对多 Agent 系统采用率急剧上升，模块化 Agent 团队在可靠性和可扩展性上显著优于单体 Agent。</li>
+      <li>a16z Big Ideas 2026：协调式 Agent 系统是 AI 架构的未来基石。</li>
+      <li>核心洞察：智能不再存在于单一模型中，而在于<strong>协调</strong>（coordination）。</li>
+    </ul>
+    <div class="source">来源：<a href="https://www.analyticsvidhya.com/blog/2026/01/ai-agents-trends/" target="_blank">Analytics Vidhya</a> · <a href="https://joget.com/ai-agent-adoption-in-2026-what-the-analysts-data-shows/" target="_blank">Joget 分析</a></div>
+  </div>
+
+  <div class="vendor-card">
+    <div class="vendor-header">
+      <span class="vendor-name">甲子光年 / 36氪</span>
+      <span class="vendor-product">中国市场</span>
+    </div>
+    <h4>国内媒体核心观点</h4>
+    <ul>
+      <li>甲子光年发布《2026 Agent 领域十大趋势判断》和《2026 企业级智能体白皮书》，核心判断：Agent 从"概念验证"走向"生产部署"。</li>
+      <li>36氪：2026 Q1 AI Agent 完成"成人礼"，四股力量形成飞轮：产品化→约束工程→递归研发→技能生态。</li>
+      <li>"Skill 把执行层的 know-how 全部蒸馏完后，Agent 不再需要你。" — 对 Data Agent 领域意味着指标语义层等核心知识正在被系统化嵌入架构。</li>
+    </ul>
+    <div class="source">来源：<a href="https://www.fxbaogao.com/archives/organization/甲子光年" target="_blank">甲子光年</a> · <a href="https://m.36kr.com/p/3760661823505154" target="_blank">36氪</a></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== 产品趋势 ===== -->
+<section id="trends">
+<div class="container">
+  <div class="section-label">Product Trends</div>
+  <h2>产品技术趋势</h2>
+
+  <div class="trend-tags">
+    <span class="trend-tag hot">Agentic SQL</span>
+    <span class="trend-tag hot">Multi-Agent</span>
+    <span class="trend-tag hot">语义层</span>
+    <span class="trend-tag">MCP 协议</span>
+    <span class="trend-tag">HTAP 架构</span>
+    <span class="trend-tag">工作流编排</span>
+    <span class="trend-tag">NL2LF2SQL</span>
+    <span class="trend-tag">本地 LLM</span>
+  </div>
+
+  <div class="vendor-card">
+    <h4>趋势 1：从 Text-to-SQL 到 Agentic SQL</h4>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7">传统 Text-to-SQL 正在被 Agentic SQL 取代。新范式下，Agent 不仅生成 SQL，还能自主执行、检查结果、发现错误后自动修正，形成完整的"提问→查询→验证→修正→输出"闭环。</p>
+  </div>
+
+  <div class="vendor-card">
+    <h4>趋势 2：多 Agent 协同成为标配</h4>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7">2026 年主流架构：将分析任务拆解给多个专业化 Agent（检索、验证、分析、报告），通过编排器协调工作流。SmartBI 白泽、Tableau Next 已落地实践。</p>
+  </div>
+
+  <div class="vendor-card">
+    <h4>趋势 3：语义层成为 Agent 的"知识底座"</h4>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7">无论是 Tableau Semantics、SmartBI 指标模型还是亿问 NL2LF2SQL，核心都指向：Agent 需要可信赖的语义层来保障准确性。没有语义层的 Data Agent 就像没有教材的学生。</p>
+  </div>
+
+  <div class="vendor-card">
+    <h4>趋势 4：MCP 协议打通 Agent 生态</h4>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7">Tableau Next 率先支持 MCP，使任意 AI 客户端可安全连接数据源。这一标准化协议有望成为 Data Agent 领域的"USB 接口"。国内厂商（思迈特已宣布支持 MCP/A2A）正在跟进。</p>
+  </div>
+
+  <div class="vendor-card">
+    <h4>趋势 5：HTAP 架构与实时决策</h4>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7">IDC 预测 60% 的企业数据平台将转向 HTAP 架构。Data Agent 需要同时处理事务性数据和分析性数据，实时决策场景的爆发倒逼数据架构从批处理走向流处理与分析的融合。</p>
+  </div>
+</div>
+</section>
+
+<!-- ===== 竞争格局 ===== -->
+<section id="landscape">
+<div class="container">
+  <div class="section-label">Competitive Landscape</div>
+  <h2>竞争格局速览</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>厂商</th><th>产品</th><th>核心路线</th><th>目标客群</th><th>本周信号</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="color:var(--accent2)">思迈特</td><td>SmartBI 白泽</td><td>Agent BI + 指标语义底座</td><td>金融/央国企/大型企业</td><td>IDC 七项能力全部第一</td></tr>
+        <tr><td style="color:var(--cyan)">字节跳动</td><td>DataAgent / DataWind</td><td>通用模型驱动 + 云生态</td><td>创新型/技术驱动团队</td><td>横评定位"通用模型驱动"</td></tr>
+        <tr><td style="color:var(--amber)">阿里云</td><td>Quick BI / AgentBay</td><td>云生态 + Agent 基础设施</td><td>中小团队/云上企业</td><td>AgentBay IDC 总分第一</td></tr>
+        <tr><td style="color:var(--green)">帆软</td><td>FineBI / FineChatBI</td><td>稳健落地 + 存量迁移</td><td>传统企业/存量客户</td><td>DACon 活跃但无重大发布</td></tr>
+        <tr><td style="color:var(--accent2)">观远数据</td><td>智能决策平台</td><td>分析→决策闭环</td><td>零售/消费行业</td><td>DACon 演讲释放决策融合信号</td></tr>
+        <tr><td style="color:var(--rose)">亿问</td><td>Data Agent</td><td>NL2LF2SQL 攻克幻觉</td><td>注重准确性的企业</td><td>与 SelectDB 完成互认证</td></tr>
+        <tr><td style="color:var(--accent)">Salesforce</td><td>Tableau Next</td><td>Agentic Analytics 全栈</td><td>全球化大中型企业</td><td>MCP 协议 + Agentforce 集成</td></tr>
+        <tr><td style="color:var(--green)">Databricks</td><td>Genie</td><td>数据平台 + Agentic SQL</td><td>数据平台用户</td><td>Text-to-SQL→Agentic SQL</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ===== 展望 ===== -->
+<section id="outlook">
+<div class="container">
+  <div class="section-label">Outlook</div>
+  <h2>展望与核心判断</h2>
+  <div class="outlook-list">
+    <div class="outlook-item">
+      <p><strong>Agent BI 正在取代传统 BI 成为企业数据消费的主入口。</strong> 2026 年的竞争焦点不是"能不能对话"，而是"结果准不准、过程可不可控、能不能进生产环境"。</p>
+    </div>
+    <div class="outlook-item">
+      <p><strong>语义层 + 多 Agent 协同 + 工作流编排</strong> 将成为 Data Agent 产品的"铁三角"标配。缺少任何一环，都难以在企业级场景中真正落地。</p>
+    </div>
+    <div class="outlook-item">
+      <p><strong>MCP 协议的普及将重塑数据接入方式。</strong> Tableau 率先发力，国内厂商跟进速度将决定生态竞争格局。</p>
+    </div>
+    <div class="outlook-item">
+      <p><strong>IDC 预测的"数据为 Agent 而生"趋势</strong>，意味着数据治理、数据架构都需要围绕 Agent 消费模式重新设计。这对传统数据团队是一次深刻的组织与技术变革。</p>
+    </div>
+    <div class="outlook-item">
+      <p><strong>下一阶段看点：</strong>Q2 各厂商新品发布季（Salesforce TC'26、阿里云峰会、帆软用户大会），以及 MCP 生态的实际落地情况。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>Data Agent 市场监控周报 · 2026-04-13 · 第 15 期</p>
+    <p>覆盖范围：2026-03-30 至 2026-04-13</p>
+    <p>信息源：IT之家 · 36氪 · 甲子光年 · 凤凰网 · IDC · Gartner · a16z · Tableau · SelectDB · Reddit · Analytics Vidhya</p>
+  </div>
+</footer>
+
+<script>
+// TOC active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav.toc a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`nav.toc a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
