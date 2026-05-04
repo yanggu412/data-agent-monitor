@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Agent 市场监控仪表板 - 2026-05-04</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #121214;
+            --bg-card: #1a1a1e;
+            --bg-hover: #222228;
+            --text-primary: #e8e8ed;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --border-color: #2a2a30;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-blue);
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .kpi-change.positive {
+            color: var(--accent-green);
+        }
+
+        .kpi-change.negative {
+            color: var(--accent-red);
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-blue);
+            display: inline-block;
+        }
+
+        /* Vendor Heatmap */
+        .heatmap-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .heatmap-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .heatmap-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .heatmap-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .heatmap-table tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .vendor-name-cell {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .vendor-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-domestic {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+        }
+
+        .badge-overseas {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            color: white;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-high {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .status-medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .status-low {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Trend Tags */
+        .trend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trend-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .trend-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .trend-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .trend-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .trend-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .trend-icon.purple {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .trend-icon.green {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .trend-icon.orange {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .trend-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .trend-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Source Distribution */
+        .source-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .source-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .source-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .source-count {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .source-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Core Insights */
+        .insights-list {
+            list-style: none;
+        }
+
+        .insight-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            border-left-color: var(--accent-purple);
+            transform: translateX(4px);
+        }
+
+        .insight-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            font-weight: 700;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .insight-content {
+            display: inline;
+        }
+
+        .insight-content strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .insight-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .header-meta {
+                justify-content: center;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trend-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .kpi-card, .trend-card, .insight-item {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .kpi-card:nth-child(1) { animation-delay: 0.1s; }
+        .kpi-card:nth-child(2) { animation-delay: 0.2s; }
+        .kpi-card:nth-child(3) { animation-delay: 0.3s; }
+        .kpi-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Data Agent 市场监控仪表板</h1>
+                <div class="header-meta">
+                    <span>📅 2026年5月4日</span>
+                    <span>📊 第18期</span>
+                    <span>🎯 8家核心厂商</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="./周报-2026-05-04.html" class="btn-primary">查看完整周报 →</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- KPI Cards -->
+        <section class="section">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">监控厂商数</div>
+                    <div class="kpi-value">8</div>
+                    <div class="kpi-change positive">
+                        <span>↑</span>
+                        <span>国内6家 + 海外2家</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">本周动态数</div>
+                    <div class="kpi-value">42</div>
+                    <div class="kpi-change positive">
+                        <span>↑</span>
+                        <span>较上周增长15%</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">信息源覆盖</div>
+                    <div class="kpi-value">6+</div>
+                    <div class="kpi-change positive">
+                        <span>✓</span>
+                        <span>厂商/媒体/社区/报告</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">技术趋势标签</div>
+                    <div class="kpi-value">4</div>
+                    <div class="kpi-change positive">
+                        <span>→</span>
+                        <span>Text-to-SQL/多Agent/架构/安全</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vendor Heatmap -->
+        <section class="section">
+            <h2 class="section-title">厂商热力表</h2>
+            <div class="heatmap-container">
+                <table class="heatmap-table">
+                    <thead>
+                        <tr>
+                            <th>厂商</th>
+                            <th>类型</th>
+                            <th>活跃度</th>
+                            <th>核心进展</th>
+                            <th>市场地位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>字节跳动 DataWind</span>
+                                </div>
+                            </td>
+                            <td>ChatBI</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>用户研究Agent发布</td>
+                            <td>企业级转型中</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>阿里云 Quick BI</span>
+                                </div>
+                            </td>
+                            <td>智能小Q</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>秒级响应能力</td>
+                            <td>云生态领先</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>帆软 FineChatBI</span>
+                                </div>
+                            </td>
+                            <td>归因分析</td>
+                            <td>
+                                <span class="status-indicator status-medium">
+                                    <span class="status-dot"></span>
+                                    中
+                                </span>
+                            </td>
+                            <td>V4.4版本发布</td>
+                            <td>万家企业采用</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>观远数据</span>
+                                </div>
+                            </td>
+                            <td>洞察Agent</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>准确率90%+</td>
+                            <td>AI+BI融合领先</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>亿问</span>
+                                </div>
+                            </td>
+                            <td>Agent生态</td>
+                            <td>
+                                <span class="status-indicator status-medium">
+                                    <span class="status-dot"></span>
+                                    中
+                                </span>
+                            </td>
+                            <td>万亿级市场预测</td>
+                            <td>行业观察视角</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-domestic">国内</span>
+                                    <span>思迈特 SmartBI</span>
+                                </div>
+                            </td>
+                            <td>白泽平台</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>IDC七项第一</td>
+                            <td>金融市占率TOP1</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-overseas">海外</span>
+                                    <span>Salesforce</span>
+                                </div>
+                            </td>
+                            <td>Agentforce</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>TC26展示agentic</td>
+                            <td>CRM生态整合</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="vendor-name-cell">
+                                    <span class="vendor-badge badge-overseas">海外</span>
+                                    <span>Databricks</span>
+                                </div>
+                            </td>
+                            <td>Genie Code</td>
+                            <td>
+                                <span class="status-indicator status-high">
+                                    <span class="status-dot"></span>
+                                    高
+                                </span>
+                            </td>
+                            <td>成功率翻倍</td>
+                            <td>数据工程领先</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Technology Trends -->
+        <section class="section">
+            <h2 class="section-title">技术趋势标签</h2>
+            <div class="trend-grid">
+                <div class="trend-card">
+                    <div class="trend-header">
+                        <div class="trend-icon blue">🔍</div>
+                        <h3 class="trend-title">Text-to-SQL演进</h3>
+                    </div>
+                    <p class="trend-description">
+                        语义层建设加强，RAG仍是核心，从简单问答走向完整查询、归因、预测和报告生成能力。Apache Doris重点建设数据标签和语义层。
+                    </p>
+                </div>
+                <div class="trend-card">
+                    <div class="trend-header">
+                        <div class="trend-icon purple">🤖</div>
+                        <h3 class="trend-title">多Agent协作编排</h3>
+                    </div>
+                    <p class="trend-description">
+                        Gartner、Forbes预测2026年加速从单一AI Agent向多Agent协作编排转型。多智能体能够分工协作、自主决策、实时调整。
+                    </p>
+                </div>
+                <div class="trend-card">
+                    <div class="trend-header">
+                        <div class="trend-icon green">🏗️</div>
+                        <h3 class="trend-title">架构演进方向</h3>
+                    </div>
+                    <p class="trend-description">
+                        AI Agent + LLM + 指标模型 + 数据模型融合架构成为主流。从"查数"到"主动分析、归因、预测、执行"的闭环。
+                    </p>
+                </div>
+                <div class="trend-card">
+                    <div class="trend-header">
+                        <div class="trend-icon orange">🔒</div>
+                        <h3 class="trend-title">企业级安全与权限</h3>
+                    </div>
+                    <p class="trend-description">
+                        Data Agent平台评估维度包括多智能体协同能力、工作流编排能力、数据模型与指标管理、深度分析能力、企业级安全与权限等七个维度。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Source Distribution -->
+        <section class="section">
+            <h2 class="section-title">资讯来源分布</h2>
+            <div class="source-grid">
+                <div class="source-item">
+                    <div class="source-count">8</div>
+                    <div class="source-label">厂商官网/文档</div>
+                </div>
+                <div class="source-item">
+                    <div class="source-count">5</div>
+                    <div class="source-label">科技媒体</div>
+                </div>
+                <div class="source-item">
+                    <div class="source-count">3</div>
+                    <div class="source-label">行业报告</div>
+                </div>
+                <div class="source-item">
+                    <div class="source-count">3</div>
+                    <div class="source-label">社区讨论</div>
+                </div>
+                <div class="source-item">
+                    <div class="source-count">2</div>
+                    <div class="source-label">技术博客</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Insights -->
+        <section class="section">
+            <h2 class="section-title">核心判断</h2>
+            <ul class="insights-list">
+                <li class="insight-item">
+                    <span class="insight-number">1</span>
+                    <div class="insight-content">
+                        <strong>2026年是AI Agent元年</strong>
+                        <p>从"聊天框"到"自主执行"的万亿级变革正在发生，高通、华为、美的等巨头均已布局。</p>
+                    </div>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-number">2</span>
+                    <div class="insight-content">
+                        <strong>Data Agent走出POC陷阱</strong>
+                        <p>2026年Data Agent将从试点走向落地，开始规模化兑现价值。</p>
+                    </div>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-number">3</span>
+                    <div class="insight-content">
+                        <strong>默认式AI时代到来</strong>
+                        <p>AI已从"技术热点"转变为"默认的存在"，无需主动感知、而是作为默认开启的底层能力无感嵌入。</p>
+                    </div>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-number">4</span>
+                    <div class="insight-content">
+                        <strong>多Agent协作成为竞争关键</strong>
+                        <p>真正的竞争优势来自于建立专属于业务的Agent工作流程，而非单纯使用内建AI功能的工具。</p>
+                    </div>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-number">5</span>
+                    <div class="insight-content">
+                        <strong>语义层和数据治理至关重要</strong>
+                        <p>AI的智能上限取决于数据的质量，睿治Agent等数据治理平台应运而生。</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 Data Agent Monitor | 自动生成 | <a href="./周报-2026-05-04.html" style="color: var(--accent-blue); text-decoration: none;">查看完整周报</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Add hover effects and animations
+        document.querySelectorAll('.kpi-card, .trend-card, .insight-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        // Smooth scroll for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
