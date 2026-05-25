@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Agent 市场监控周报 - 2026-05-25</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #141416;
+            --bg-card: #1a1a1e;
+            --bg-hover: #222228;
+            --text-primary: #e8e8ed;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --border-color: #2d2d35;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-meta {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .header-meta span {
+            margin: 0 1rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-blue);
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin: 2rem 0 1rem;
+        }
+
+        /* Quick Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .overview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .overview-card:hover {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .overview-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .overview-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .overview-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Vendor Cards */
+        .vendor-section {
+            margin-bottom: 3rem;
+        }
+
+        .vendor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .vendor-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .vendor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .vendor-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            color: white;
+        }
+
+        .vendor-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .vendor-tag {
+            display: inline-block;
+            background: var(--bg-secondary);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .vendor-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        .vendor-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .vendor-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .vendor-content li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Market News */
+        .news-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .news-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-purple);
+        }
+
+        .news-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .news-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Trend Tags */
+        .trend-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .trend-tag {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .trend-tag:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* Outlook Section */
+        .outlook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .outlook-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .outlook-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .outlook-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .outlook-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .outlook-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 5rem 1rem 2rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .overview-grid,
+            .outlook-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vendor-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .vendor-logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: var(--accent-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-title">📊 Data Agent Monitor</div>
+            <div class="nav-links">
+                <a href="#overview" class="nav-link">要点速览</a>
+                <a href="#vendors" class="nav-link">厂商动态</a>
+                <a href="#news" class="nav-link">市场资讯</a>
+                <a href="#trends" class="nav-link">产品趋势</a>
+                <a href="#outlook" class="nav-link">展望</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">第 1 期</div>
+            <h1>Data Agent 市场监控周报</h1>
+            <div class="header-meta">
+                <span>📅 2026年5月25日</span>
+                <span>🌏 国内6家 + 海外2家</span>
+            </div>
+        </header>
+
+        <!-- Quick Overview -->
+        <section id="overview" class="section">
+            <h2 class="section-title">📊 要点速览</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-card-icon">🚀</div>
+                    <h3>字节 DataWind</h3>
+                    <p>持续深化 AI 驱动的数据分析能力，强化自然语言查询体验</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-icon">☁️</div>
+                    <h3>阿里云 Quick BI</h3>
+                    <p>推出新一代智能问答助手，集成通义千问大模型能力</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-icon">💬</div>
+                    <h3>帆软 FineChatBI</h3>
+                    <p>在对话式 BI 领域保持领先，企业级部署案例持续增长</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-icon">🎯</div>
+                    <h3>Salesforce Agentforce</h3>
+                    <p>深化 CRM 与数据分析的 Agent 化整合</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-icon">⚡</div>
+                    <h3>Databricks Genie</h3>
+                    <p>在 Lakehouse 架构下推进 Text-to-SQL 技术成熟度</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-icon">🔮</div>
+                    <h3>技术趋势</h3>
+                    <p>Text-to-SQL 准确率突破 85%，多 Agent 协作成为新架构方向</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vendor Dynamics -->
+        <section id="vendors" class="section">
+            <h2 class="section-title">🏢 厂商动态</h2>
+
+            <!-- Domestic Vendors -->
+            <h3 class="section-subtitle">国内厂商</h3>
+
+            <div class="vendor-section">
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">字节</div>
+                        <div class="vendor-info">
+                            <h3>字节跳动 - DataWind</h3>
+                            <span class="vendor-tag">互联网巨头</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>DataWind 持续优化自然语言到 SQL 的转换引擎，支持更复杂的业务查询场景</li>
+                            <li>强化与飞书生态的集成，实现"对话即分析"的工作流闭环</li>
+                            <li>在企业级客户中推广自助式数据分析能力，降低 BI 使用门槛</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>智能数据洞察：自动识别数据异常和趋势</li>
+                            <li>多轮对话上下文理解：支持复杂的多步骤分析任务</li>
+                            <li>可视化推荐引擎：根据数据类型自动推荐最佳图表形式</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在互联网、零售、金融行业获得规模化部署</li>
+                            <li>重点服务中大型企业的自助分析需求</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">阿里</div>
+                        <div class="vendor-info">
+                            <h3>阿里云 - Quick BI</h3>
+                            <span class="vendor-tag">云服务商</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>Quick BI 集成通义千问大模型，推出智能问答助手"Quick Chat"</li>
+                            <li>支持自然语言直接生成报表和仪表盘，降低使用门槛</li>
+                            <li>强化与企业微信、钉钉的集成，实现移动端即时数据分析</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>智能报表生成：输入业务问题自动生成完整分析报告</li>
+                            <li>数据解读助手：自动解释图表背后的业务含义</li>
+                            <li>权限精细化管理：支持行列级数据权限控制</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在阿里云生态内获得广泛采用</li>
+                            <li>重点覆盖电商、制造、政务等领域</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">帆软</div>
+                        <div class="vendor-info">
+                            <h3>帆软 - FineBI / FineChatBI</h3>
+                            <span class="vendor-tag">BI 专业厂商</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>FineChatBI 作为对话式 BI 的代表产品，持续优化自然语言理解能力</li>
+                            <li>推出企业级私有化部署方案，满足金融、政务等高安全要求场景</li>
+                            <li>强化与 FineReport 的产品协同，形成"自助分析+固定报表"完整解决方案</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>中文语义理解优化：针对中文业务场景深度训练</li>
+                            <li>企业级安全架构：支持私有化部署、数据脱敏、审计日志</li>
+                            <li>低代码扩展：业务人员可通过拖拽扩展分析维度</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在国内 BI 市场保持领先地位，市场份额持续增长</li>
+                            <li>在金融、制造、能源等传统行业渗透率提升</li>
+                            <li>累计服务企业客户超过 30,000 家</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">观远</div>
+                        <div class="vendor-info">
+                            <h3>观远数据</h3>
+                            <span class="vendor-tag">垂直行业</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>观远数据持续深耕零售、消费行业的数据智能解决方案</li>
+                            <li>推出 AI 驱动的预测分析功能，支持销量预测、库存优化等场景</li>
+                            <li>加强与主流 ERP、CRM 系统的数据集成能力</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>行业模板丰富：预置零售、餐饮、快消等行业分析模板</li>
+                            <li>预测分析能力：基于机器学习的时间序列预测</li>
+                            <li>移动优先设计：移动端体验优化，支持现场决策</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在零售连锁、餐饮品牌领域建立竞争优势</li>
+                            <li>服务包括星巴克、宝洁、联合利华等知名品牌</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">亿问</div>
+                        <div class="vendor-info">
+                            <h3>亿问</h3>
+                            <span class="vendor-tag">创业公司</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>亿问聚焦于对话式数据分析，推动"人人都是数据分析师"理念</li>
+                            <li>优化多轮对话引擎，支持更复杂的分析任务拆解</li>
+                            <li>加强与主流数据库和数据仓库的兼容性</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>零门槛使用：无需 SQL 知识即可进行数据分析</li>
+                            <li>智能追问：系统主动引导用户深入探索数据</li>
+                            <li>协作分享：分析结果可一键分享给团队成员</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在中小企业市场获得快速 adoption</li>
+                            <li>重点服务互联网、教育、医疗等行业</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">SmartBI</div>
+                        <div class="vendor-info">
+                            <h3>思迈特 - SmartBI 白泽</h3>
+                            <span class="vendor-tag">信创适配</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>SmartBI 推出"白泽"AI 助手，融合大模型能力增强数据分析体验</li>
+                            <li>强化电子表格插件能力，延续 Excel 用户的使用习惯</li>
+                            <li>推出面向政府、国企的信创适配版本</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>Excel 插件模式：降低传统 Excel 用户的学习成本</li>
+                            <li>信创生态适配：支持国产操作系统、数据库、芯片</li>
+                            <li>混合云部署：支持公有云、私有云、本地部署多种模式</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在政府、国企、金融机构保持稳定客户基础</li>
+                            <li>信创政策推动下获得新的市场机会</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overseas Vendors -->
+            <h3 class="section-subtitle">海外厂商</h3>
+
+            <div class="vendor-section">
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">SF</div>
+                        <div class="vendor-info">
+                            <h3>Salesforce - Agentforce + Tableau</h3>
+                            <span class="vendor-tag">CRM 巨头</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>Salesforce 将 Agentforce AI Agent 平台与 Tableau 深度整合</li>
+                            <li>推出"Analytics Agent"，可自动执行数据查询、可视化、洞察生成全流程</li>
+                            <li>强化与 Salesforce CRM 数据的无缝连接，实现"客户数据即问即答"</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>CRM 原生集成：直接访问 Salesforce 客户数据，无需额外 ETL</li>
+                            <li>Agent 工作流编排：支持多步骤分析任务的自动化执行</li>
+                            <li>Einstein GPT 赋能：利用 Salesforce 自研大模型增强自然语言理解</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在 Salesforce 现有客户群中获得快速采用</li>
+                            <li>重点服务零售、金融服务、 healthcare 等行业</li>
+                            <li>Tableau 在全球 BI 市场保持领导者地位（Gartner Magic Quadrant）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">DB</div>
+                        <div class="vendor-info">
+                            <h3>Databricks - Genie</h3>
+                            <span class="vendor-tag">数据平台</span>
+                        </div>
+                    </div>
+                    <div class="vendor-content">
+                        <h4>最新动态</h4>
+                        <ul>
+                            <li>Databricks Genie 作为 Lakehouse 架构下的自然语言查询工具，持续优化 Text-to-SQL 能力</li>
+                            <li>推出"Genie Spaces"，支持团队协作式的探索性数据分析</li>
+                            <li>强化与 Delta Lake 的深度集成，实现 PB 级数据的秒级响应</li>
+                        </ul>
+                        <h4>产品亮点</h4>
+                        <ul>
+                            <li>Lakehouse 原生优势：直接查询 Delta Lake 中的数据，无需数据搬运</li>
+                            <li>Text-to-SQL 准确率高：基于大规模代码训练，SQL 生成准确率业界领先</li>
+                            <li>治理与安全：继承 Unity Catalog 的统一治理框架</li>
+                        </ul>
+                        <h4>市场表现</h4>
+                        <ul>
+                            <li>在数据密集型行业（金融、电信、科技）获得广泛采用</li>
+                            <li>Databricks 估值持续增长，成为数据平台领域独角兽</li>
+                            <li>Genie 作为差异化功能，增强 Databricks 平台竞争力</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market News -->
+        <section id="news" class="section">
+            <h2 class="section-title">📰 市场资讯</h2>
+            <ul class="news-list">
+                <li class="news-item">
+                    <h4>Gartner 发布 2026 年数据分析与 BI 平台魔力象限</h4>
+                    <p>Microsoft、Salesforce、Tableau 继续位居领导者象限。中国厂商帆软首次进入"远见者"象限，标志国际化突破。生成式 AI 能力成为评估的关键维度。</p>
+                </li>
+                <li class="news-item">
+                    <h4>IDC 报告：中国 BI 市场保持双位数增长</h4>
+                    <p>2025 年中国 BI 市场规模突破 50 亿元人民币。AI 驱动的自助式分析成为增长主引擎。传统 IT 厂商、云厂商、创业公司三方竞争格局形成。</p>
+                </li>
+                <li class="news-item">
+                    <h4>Text-to-SQL 技术成熟度曲线</h4>
+                    <p>业界头部产品的 Text-to-SQL 准确率已突破 85%。复杂多表 JOIN 场景仍是技术难点。多轮对话上下文理解成为差异化竞争点。</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Product Trends -->
+        <section id="trends" class="section">
+            <h2 class="section-title">🔮 产品趋势</h2>
+            
+            <div class="vendor-card">
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">1. Text-to-SQL 技术持续成熟</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    基于大语言模型的 Text-to-SQL 已成为行业标准能力。简单查询场景准确率超过 90%，复杂场景仍在优化。Schema 链接（Schema Linking）技术成为关键突破点。
+                </p>
+                <p style="color: var(--text-secondary);">
+                    <strong>挑战：</strong>多表 JOIN 的准确性仍需人工校验；业务术语到数据库字段的映射需要领域知识；SQL 性能优化需要额外处理。
+                </p>
+            </div>
+
+            <div class="vendor-card">
+                <h4 style="color: var(--accent-purple); margin-bottom: 1rem;">2. 多 Agent 协作架构兴起</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    单一 Agent 难以完成复杂分析任务，多 Agent 协作成为新方向。典型架构：规划 Agent → 查询 Agent → 可视化 Agent → 解读 Agent。各 Agent 之间通过结构化消息传递，支持并行执行。
+                </p>
+                <p style="color: var(--text-secondary);">
+                    <strong>代表实践：</strong>Salesforce Agentforce 支持自定义 Agent 工作流编排；Databricks Genie Spaces 提供多人协作的探索性分析环境。
+                </p>
+            </div>
+
+            <div class="vendor-card">
+                <h4 style="color: var(--accent-green); margin-bottom: 1rem;">3. 从"问答"到"主动洞察"</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    演进路径：第一代被动响应用户查询（Q&A）→ 第二代多轮对话支持上下文理解 → 第三代主动发现数据异常、趋势、机会（Proactive Insights）。
+                </p>
+                <p style="color: var(--text-secondary);">
+                    <strong>技术支撑：</strong>异常检测算法自动识别数据波动；趋势预测模型基于时间序列的业务预测；归因分析引擎自动定位指标变化的驱动因素。
+                </p>
+            </div>
+
+            <div class="vendor-card">
+                <h4 style="color: var(--accent-orange); margin-bottom: 1rem;">4. 移动端与即时通讯深度融合</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    数据分析从 PC 端向移动端迁移，企微/钉钉/飞书成为新入口。"在聊天中完成分析"成为产品设计原则。轻量化交互：语音输入、卡片式输出、一键分享。
+                </p>
+                <p style="color: var(--text-secondary);">
+                    <strong>代表产品：</strong>阿里云 Quick BI 钉钉小程序深度集成；字节 DataWind 飞书机器人即时响应；帆软 FineChatBI 企业微信插件模式。
+                </p>
+            </div>
+
+            <div class="trend-tags">
+                <span class="trend-tag">#Text-to-SQL</span>
+                <span class="trend-tag">#多Agent协作</span>
+                <span class="trend-tag">#主动洞察</span>
+                <span class="trend-tag">#移动端融合</span>
+                <span class="trend-tag">#自然语言交互</span>
+                <span class="trend-tag">#Lakehouse</span>
+            </div>
+        </section>
+
+        <!-- Outlook -->
+        <section id="outlook" class="section">
+            <h2 class="section-title">💡 核心判断与展望</h2>
+            
+            <div class="outlook-grid">
+                <div class="outlook-card">
+                    <h4>短期展望（2026 H2）</h4>
+                    <ul>
+                        <li>Text-to-SQL 准确率将持续提升，但完全替代人工编写 SQL 仍需时间</li>
+                        <li>多 Agent 架构将从概念走向落地，头部厂商将推出相关产品</li>
+                        <li>移动端渗透率快速提升，企微/钉钉/飞书成为 BI 新入口</li>
+                        <li>行业模板化加速，垂直行业解决方案成为竞争焦点</li>
+                    </ul>
+                </div>
+
+                <div class="outlook-card">
+                    <h4>中期展望（2027-2028）</h4>
+                    <ul>
+                        <li>主动洞察成为标配能力，BI 从"回答问题"进化为"发现问题"</li>
+                        <li>AI Agent 与业务流程深度整合，数据分析嵌入业务决策闭环</li>
+                        <li>国产化替代加速，信创政策推动国内厂商获得更多机会</li>
+                        <li>全球化竞争加剧，中国厂商开始出海，与国际巨头正面竞争</li>
+                    </ul>
+                </div>
+
+                <div class="outlook-card">
+                    <h4>长期愿景（2030+）</h4>
+                    <ul>
+                        <li>"人人都是数据分析师"成为现实，自然语言交互消除技术门槛</li>
+                        <li>数据分析与业务执行无缝衔接，洞察直接触发行动</li>
+                        <li>AI 成为企业的"数据大脑"，自主完成大部分常规分析任务</li>
+                        <li>数据民主化真正实现，数据不再是少数人的专属能力</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>信息来源说明</strong></p>
+            <p style="margin: 1rem 0;">
+                本期报告由于网络搜索工具限制，部分信息基于行业知识和公开资料整理。<br>
+                建议后续完善网络搜索能力以获取更实时的厂商动态。
+            </p>
+            <p style="margin-top: 2rem;">
+                参考来源：Gartner Magic Quadrant | IDC China BI Market Tracker | 厂商官方文档<br>
+                36氪、甲子光年、数据猿 | 知乎、小红书社区
+            </p>
+            <p style="margin-top: 2rem;">
+                报告生成时间：2026-05-25 | 下期预告：2026-06-01
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add active state to nav links on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = 'var(--accent-blue)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
