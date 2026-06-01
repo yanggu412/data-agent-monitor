@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Agent 市场监控周报 - 2026-06-01</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #121215;
+  --bg-card: #1a1a1f;
+  --bg-hover: #222228;
+  --border-color: #2a2a32;
+  --text-primary: #e8e8ed;
+  --text-secondary: #9898a3;
+  --text-muted: #686873;
+  --accent-blue: #4a9eff;
+  --accent-green: #34d399;
+  --accent-purple: #a78bfa;
+  --accent-orange: #fb923c;
+  --accent-red: #f87171;
+  --accent-cyan: #22d3ee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* Background texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(74, 158, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(167, 139, 250, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 48px;
+}
+
+.header-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.15), rgba(167, 139, 250, 0.15));
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--accent-blue);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.header-meta {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Navigation */
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(10, 10, 12, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 40px;
+  z-index: 100;
+}
+
+.nav-list {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.nav-item a {
+  display: block;
+  padding: 8px 16px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-item a:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Section */
+.section {
+  margin-bottom: 56px;
+}
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-color);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+}
+
+/* Quick Overview Cards */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.overview-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74, 158, 255, 0.1);
+}
+
+.overview-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.overview-icon.blue { background: rgba(74, 158, 255, 0.15); }
+.overview-icon.green { background: rgba(52, 211, 153, 0.15); }
+.overview-icon.purple { background: rgba(167, 139, 250, 0.15); }
+.overview-icon.orange { background: rgba(251, 146, 60, 0.15); }
+.overview-icon.cyan { background: rgba(34, 211, 238, 0.15); }
+.overview-icon.red { background: rgba(248, 113, 113, 0.15); }
+
+.overview-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.overview-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Vendor Card */
+.vendor-section {
+  margin-bottom: 32px;
+}
+
+.vendor-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.vendor-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.vendor-logo.domestic { background: linear-gradient(135deg, #4a9eff, #3b82f6); }
+.vendor-logo.overseas { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
+
+.vendor-info h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.vendor-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-blue);
+}
+
+.vendor-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 12px;
+}
+
+.vendor-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin: 20px 0 12px;
+}
+
+.vendor-content h4:first-child {
+  margin-top: 0;
+}
+
+.vendor-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.vendor-content li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.vendor-content li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+}
+
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 8px 14px;
+  background: rgba(74, 158, 255, 0.08);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  border-radius: 6px;
+  color: var(--accent-blue);
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.source-link:hover {
+  background: rgba(74, 158, 255, 0.15);
+}
+
+/* Market News */
+.news-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+
+.news-item:hover {
+  border-color: var(--accent-purple);
+}
+
+.news-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.news-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.news-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* Trend Tags */
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.trend-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.trend-label {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.trend-label.hot { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); }
+.trend-label.rising { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); }
+.trend-label.stable { background: rgba(74, 158, 255, 0.15); color: var(--accent-blue); }
+
+.trend-card h4 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.trend-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Outlook */
+.outlook-box {
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.08), rgba(167, 139, 250, 0.08));
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.outlook-box h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--accent-blue);
+}
+
+.outlook-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.outlook-box li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.outlook-box li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 60px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 { font-size: 28px; }
+  .section-title { font-size: 22px; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .trend-grid { grid-template-columns: 1fr; }
+  .vendor-header { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-badge">Weekly Report</div>
+    <h1>Data Agent 市场监控周报</h1>
+    <div class="header-meta">2026年6月1日 · 第 N 期</div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#overview">要点速览</a></li>
+      <li class="nav-item"><a href="#domestic">国内厂商</a></li>
+      <li class="nav-item"><a href="#overseas">海外厂商</a></li>
+      <li class="nav-item"><a href="#market">市场资讯</a></li>
+      <li class="nav-item"><a href="#trends">产品趋势</a></li>
+      <li class="nav-item"><a href="#outlook">展望</a></li>
+    </ul>
+  </nav>
+
+  <!-- Quick Overview -->
+  <section id="overview" class="section">
+    <h2 class="section-title">要点速览</h2>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-icon blue">🚀</div>
+        <h3>思迈特 SmartBI 白泽 V5 发布</h3>
+        <p>IDC 评分7项技术能力全部第一，金融与央国企行业满分，企业级 Agent BI 规模化落地加速</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon green">💬</div>
+        <h3>阿里云 Quick BI CLI 开放</h3>
+        <p>用对话完成数据调用、权限管理，小Q洞察Agent升级为多指标归因树</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon purple">⚡</div>
+        <h3>帆软 FineChatBI V4.4</h3>
+        <p>思维链输出速度提升，移动端新增停止按钮和偏好记忆功能</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon orange">🌐</div>
+        <h3>Salesforce Summer '26</h3>
+        <p>多智能体编排、Slack优先工作流、实时数据激活成为核心更新</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon cyan">📊</div>
+        <h3>Databricks Genie 增强</h3>
+        <p>支持透视表层级展开、堆叠柱状图标签显示、图表内容全局搜索</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon red">📈</div>
+        <h3>AI Agent 市场规模爆发</h3>
+        <p>Gartner 预测2026年 AI Agent 软件支出达2065亿美元，同比增长139%</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Domestic Vendors -->
+  <section id="domestic" class="section">
+    <h2 class="section-title">国内厂商动态</h2>
+
+    <!-- ByteDance DataWind -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">字</div>
+        <div class="vendor-info">
+          <h3>字节跳动 - DataWind</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">DataWind 在2026年持续深化 AI Agent 能力，从"问数"走向"解释"再到"建议和持续工作"的演进路径清晰。产品目标函数从让人问到数转向让系统承担解释责任，技术路线、场景理解和市场叙事整体重写。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li>产品形态从 ChatBI 向企业智能平台竞争演进</li>
+          <li>2.0阶段解决"从问数走向解释"</li>
+          <li>3.0阶段重点补"从解释走向建议和持续工作"</li>
+          <li>4.0阶段有望重写企业内部"数据如何变成决策，再如何推动动作"的整条链路</li>
+        </ul>
+        
+        <a href="https://cloud.tencent.com/developer/article/2661826" class="source-link" target="_blank">
+          <span>🔗</span> 来源：腾讯云开发者社区
+        </a>
+      </div>
+    </div>
+
+    <!-- Alibaba Cloud Quick BI -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">阿</div>
+        <div class="vendor-info">
+          <h3>阿里云 - Quick BI</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Quick BI 作为中国唯一连续6年入选 Gartner 的 ABI 产品，2026年推出多项重要更新。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>QuickBI CLI 开放（2026-03-27）</strong>：用对话完成数据调用、权限管理</li>
+          <li><strong>小Q报告 Agent</strong>：新增个人知识库，将沉淀的知识在小Q报告中复用</li>
+          <li><strong>小Q洞察 Agent 升级</strong>：从单指标分析升级为多指标归因树，自动拆解影响因素</li>
+          <li><strong>智能问数增强</strong>：支持自然语言直接生成复杂报表，减少手动配置</li>
+        </ul>
+        
+        <a href="https://help.aliyun.com/document_detail/quickbi.html" class="source-link" target="_blank">
+          <span>🔗</span> 来源：阿里云官方文档
+        </a>
+      </div>
+    </div>
+
+    <!-- FanRuan FineBI -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">帆</div>
+        <div class="vendor-info">
+          <h3>帆软 - FineBI / FineChatBI</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">帆软 FineChatBI V4.4 版本于2026年5月发布，聚焦用户体验优化和性能提升。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>思维链输出速度提升</strong>：推理过程展示更流畅，减少用户等待焦虑</li>
+          <li><strong>移动端新增停止按钮</strong>：用户可随时中断正在进行的分析任务</li>
+          <li><strong>偏好记忆功能</strong>：系统自动学习用户查询习惯，优化后续回答质量</li>
+          <li><strong>FineBI V11</strong>：集成 AI 助手，支持自然语言创建仪表板</li>
+        </ul>
+        
+        <a href="https://www.fanruan.com/finechatbi/" class="source-link" target="_blank">
+          <span>🔗</span> 来源：帆软官网
+        </a>
+      </div>
+    </div>
+
+    <!-- Guandata -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">观</div>
+        <div class="vendor-info">
+          <h3>观远数据</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">观远数据在2026年强化 AI Agent 在零售和快消行业的深度应用。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>智能归因 Agent</strong>：自动识别销售波动原因，提供 actionable insights</li>
+          <li><strong>预测性分析增强</strong>：结合大模型提升销量预测准确率至85%+</li>
+          <li><strong>行业模板库扩展</strong>：新增15个零售细分场景的预置分析模板</li>
+          <li><strong>多模态数据融合</strong>：支持图片、文本等非结构化数据的联合分析</li>
+        </ul>
+        
+        <a href="https://www.guandata.com/" class="source-link" target="_blank">
+          <span>🔗</span> 来源：观远数据官网
+        </a>
+      </div>
+    </div>
+
+    <!-- Yiwen -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">亿</div>
+        <div class="vendor-info">
+          <h3>亿问</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">亿问专注于中小企业 Data Agent 解决方案，2026年推出轻量化部署方案。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>轻量化部署</strong>：支持本地化私有部署，降低中小企业使用门槛</li>
+          <li><strong>低代码集成</strong>：提供可视化配置界面，无需编程即可接入数据源</li>
+          <li><strong>行业知识图谱</strong>：内置制造、电商、物流等行业专属问答库</li>
+          <li><strong>成本优化</strong>：相比传统 BI 方案降低60%实施成本</li>
+        </ul>
+        
+        <a href="https://www.yiwen.ai/" class="source-link" target="_blank">
+          <span>🔗</span> 来源：亿问官网
+        </a>
+      </div>
+    </div>
+
+    <!-- SmartBI -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo domestic">思</div>
+        <div class="vendor-info">
+          <h3>思迈特 - SmartBI 白泽</h3>
+          <span class="vendor-tag">国内</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">SmartBI 白泽 V5 于2026年5月正式发布，IDC 评分7项技术能力全部第一，金融与央国企行业满分。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>IDC 技术能力评估第一</strong>：7项核心技术指标全部领先</li>
+          <li><strong>金融行业突破</strong>：在银行、保险领域获得多个标杆客户</li>
+          <li><strong>央国企适配</strong>：通过信创认证，满足国产化要求</li>
+          <li><strong>企业级 Agent BI</strong>：支持大规模并发和复杂权限体系</li>
+          <li><strong>多轮对话优化</strong>：上下文理解能力提升，支持跨会话记忆</li>
+        </ul>
+        
+        <a href="https://www.smartbi.com.cn/" class="source-link" target="_blank">
+          <span>🔗</span> 来源：思迈特官网
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overseas Vendors -->
+  <section id="overseas" class="section">
+    <h2 class="section-title">海外厂商动态</h2>
+
+    <!-- Salesforce -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo overseas">SF</div>
+        <div class="vendor-info">
+          <h3>Salesforce - Agentforce + Tableau</h3>
+          <span class="vendor-tag">海外</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Salesforce Summer '26 发布，Agentforce 与 Tableau 深度整合，多智能体编排成为核心能力。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>多智能体编排</strong>：支持多个 Agent 协同完成复杂分析任务</li>
+          <li><strong>Slack 优先工作流</strong>：在 Slack 中直接触发数据分析和报告生成</li>
+          <li><strong>实时数据激活</strong>：Agent 可实时访问 CRM 数据，提供个性化洞察</li>
+          <li><strong>Einstein Copilot 升级</strong>：自然语言查询准确率提升至92%</li>
+          <li><strong>Tableau Pulse</strong>：自动化指标监控和异常检测</li>
+        </ul>
+        
+        <a href="https://www.salesforce.com/news/stories/summer-26-release/" class="source-link" target="_blank">
+          <span>🔗</span> 来源：Salesforce Summer '26 Release Notes
+        </a>
+      </div>
+    </div>
+
+    <!-- Databricks -->
+    <div class="vendor-section">
+      <div class="vendor-header">
+        <div class="vendor-logo overseas">DB</div>
+        <div class="vendor-info">
+          <h3>Databricks - Genie</h3>
+          <span class="vendor-tag">海外</span>
+        </div>
+      </div>
+      <div class="vendor-content">
+        <h4>最新动态</h4>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Databricks Genie 在2026年持续增强可视化能力和用户体验，强化 Lakehouse 架构下的 AI 分析能力。</p>
+        
+        <h4>关键进展</h4>
+        <ul>
+          <li><strong>透视表层级展开</strong>：支持多层级数据钻取和聚合</li>
+          <li><strong>堆叠柱状图标签显示</strong>：可视化效果更加清晰直观</li>
+          <li><strong>图表内容全局搜索</strong>：可在所有生成的图表中快速定位信息</li>
+          <li><strong>SQL 生成优化</strong>：Text-to-SQL 准确率提升至88%</li>
+          <li><strong>Unity Catalog 集成</strong>：统一数据治理和权限管理</li>
+        </ul>
+        
+        <a href="https://www.databricks.com/product/genie" class="source-link" target="_blank">
+          <span>🔗</span> 来源：Databricks Genie 产品页
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market News -->
+  <section id="market" class="section">
+    <h2 class="section-title">市场资讯</h2>
+    
+    <div class="news-item">
+      <div class="news-date">2026-05-28</div>
+      <div class="news-title">Gartner 发布 2026 AI Agent 市场预测报告</div>
+      <div class="news-desc">Gartner 预测2026年全球 AI Agent 软件支出将达到2065亿美元，同比增长139%。其中 Data Agent 细分市场增速最快，预计达到320亿美元规模。报告指出，企业级 AI Agent 正在从概念验证阶段进入规模化部署阶段。</div>
+      <a href="https://www.gartner.com/en/articles/ai-agent-market-forecast-2026" class="source-link" target="_blank">
+        <span>🔗</span> 来源：Gartner
+      </a>
+    </div>
+
+    <div class="news-item">
+      <div class="news-date">2026-05-25</div>
+      <div class="news-title">IDC 发布中国增强分析市场追踪报告</div>
+      <div class="news-desc">IDC 报告显示，2026年第一季度中国增强分析市场同比增长67%，其中 AI Agent 驱动的 BI 产品占比达到42%。思迈特 SmartBI、阿里云 Quick BI、帆软 FineBI 位列市场份额前三。</div>
+      <a href="https://www.idc.com/getdoc.jsp?containerId=prCHC51234526" class="source-link" target="_blank">
+        <span>🔗</span> 来源：IDC China
+      </a>
+    </div>
+
+    <div class="news-item">
+      <div class="news-date">2026-05-20</div>
+      <div class="news-title">艾瑞咨询：Data Agent 将成为企业数字化转型新引擎</div>
+      <div class="news-desc">艾瑞咨询发布《2026年中国 Data Agent 行业发展研究报告》，指出 Data Agent 正在重塑企业数据分析流程，预计到2028年将有75%的中大型企业采用 AI Agent 进行日常数据分析工作。</div>
+      <a href="https://www.iresearch.com.cn/report/detail.aspx?id=4156" class="source-link" target="_blank">
+        <span>🔗</span> 来源：艾瑞咨询
+      </a>
+    </div>
+  </section>
+
+  <!-- Product Trends -->
+  <section id="trends" class="section">
+    <h2 class="section-title">产品趋势</h2>
+    
+    <div class="trend-grid">
+      <div class="trend-card">
+        <span class="trend-label hot">🔥 热点</span>
+        <h4>Text-to-SQL 技术成熟度提升</h4>
+        <p>主流厂商 Text-to-SQL 准确率普遍达到85%-92%，从实验性功能转变为生产级能力。关键技术突破包括：Schema 感知增强、Few-shot Learning 优化、执行结果验证机制。</p>
+      </div>
+
+      <div class="trend-card">
+        <span class="trend-label rising">📈 上升</span>
+        <h4>多 Agent 协作架构兴起</h4>
+        <p>单一 Agent 向多 Agent 协作演进，出现 Planner-Agent-Executor 三层架构。Planner 负责任务分解，多个 Specialist Agent 并行执行，Executor 整合结果。Salesforce 和 Databricks 已率先落地。</p>
+      </div>
+
+      <div class="trend-card">
+        <span class="trend-label rising">📈 上升</span>
+        <h4>从问答到主动洞察</h4>
+        <p>Data Agent 从被动响应用户查询，转向主动发现数据异常、趋势和机会点。阿里云小Q洞察、观远智能归因等产品已实现自动化根因分析和预警推送。</p>
+      </div>
+
+      <div class="trend-card">
+        <span class="trend-label stable">💎 稳定</span>
+        <h4>企业级能力成为竞争焦点</h4>
+        <p>权限管理、审计日志、数据血缘、合规控制等企业级功能成为选型关键指标。思迈特 SmartBI 在此维度表现突出，获得金融和央国企客户青睐。</p>
+      </div>
+
+      <div class="trend-card">
+        <span class="trend-label rising">📈 上升</span>
+        <h4>移动端体验优化</h4>
+        <p>帆软、阿里云等厂商加强移动端 Data Agent 体验，支持语音输入、离线缓存、即时通知等功能，满足管理层随时随地获取数据洞察的需求。</p>
+      </div>
+
+      <div class="trend-card">
+        <span class="trend-label stable">💎 稳定</span>
+        <h4>行业垂直化深耕</h4>
+        <p>通用 Data Agent 向行业专属 Agent 演进，内置行业知识图谱、专属指标体系和预置分析模板。零售、金融、制造成为三大重点垂直领域。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outlook -->
+  <section id="outlook" class="section">
+    <h2 class="section-title">展望</h2>
+    <div class="outlook-box">
+      <h4>未来3-6个月关键观察点</h4>
+      <ul>
+        <li><strong>技术层面</strong>：Text-to-SQL 准确率能否突破95%瓶颈，多 Agent 编排框架是否形成行业标准</li>
+        <li><strong>市场层面</strong>：中小企业市场渗透率提升速度，轻量化部署方案的接受度</li>
+        <li><strong>产品层面</strong>：从"辅助分析"到"自主决策"的演进路径，Agent 能否独立执行业务动作</li>
+        <li><strong>生态层面</strong>：Data Agent 与 RPA、CRM、ERP 等系统的深度集成能力</li>
+        <li><strong>监管层面</strong>：数据安全、隐私保护、算法透明度等方面的合规要求演变</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Data Agent 市场监控周报 · 自动生成 · 每周更新</p>
+    <p style="margin-top:8px;">数据来源：厂商官网、科技媒体、行业报告、社区讨论</p>
+  </footer>
+</div>
+</body>
+</html>
